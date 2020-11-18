@@ -40,8 +40,15 @@ namespace Pazaryeri.Web.Areas.Magaza.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.UserName);
-                var gelenMagaza = _magazaService.MagazaGetirEposta(user.UserName);
-                if (user != null && gelenMagaza.durum == true)
+
+                bool durum = false;
+                if (user.UserName != null)
+                {
+                    durum = _magazaService.MagazaGetirEposta(user.UserName).durum;
+                }
+
+               
+                if (user != null && durum == true)
                 {
                     var sonuc = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
                     if (sonuc.Succeeded)
