@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Sil";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model KategoriListeDTO
+<div class="row" style="margin:auto; width:70%">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bu veri kalıcı olarak silinicektir.Eminmisiniz?</h5>
+                <form asp-action="Sil" method="post">
+
+                    @*@Html.AntiForgeryToken()*@
+                    <div class="form-group">
+                        <label class="form-label">Kategori adı</label>
+                        <input type="text" asp-for="kategori_adi" value="@Model.kategori_adi" class="form-control" readonly />
+                        <div class="clearfix"></div>
+                    </div>
+                    @if (Model.ust_kategori_adi == null)
+                    {
+                        <div class="form-group">
+                            <label class="form-label">Üst kategori</label>
+                            <input type="text" asp-for="ust_kategori_adi" value="Anakategori" class="form-control" readonly />
+                            <div class="clearfix"></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="form-label">Üst kategori</label>
+                            <input type="text" asp-for="ust_kategori_adi" value="@Model.ust_kategori_adi" class="form-control" readonly />
+                            <div class="clearfix"></div>
+                        </div>
+                    }
+                    @if (Model.resim == "default.png")
+                    {
+                        <img src="~/img/@Model.resim" class="img-fluid img-radius wid-80" alt="">
+                    }
+                    else
+                    {
+                        <img src="~/img/Kategori/@Model.resim" class="img-fluid img-radius wid-80" alt="">
+                    }
+                <div class="form-group">
+
+                    <input type="text" asp-for="resim" hidden />
+                    <div class="clearfix"></div>
+                </div>
+                    <button type="submit" value="Sil" class="btn btn-primary">Sil</button>
+                    <a asp-action="Index" class="btn btn-info btn">İptal</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

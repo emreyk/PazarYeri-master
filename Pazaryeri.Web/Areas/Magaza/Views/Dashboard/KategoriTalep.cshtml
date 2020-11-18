@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "CategoryRequest";
+    Layout = "~/Areas/Magaza/Views/Shared/_MagazaLayout.cshtml";
+}
+
+
+<div class="layout-content">
+    <div class="container-fluid flex-grow-1 container-p-y">
+        <a style="float:right" asp-area="Magaza" asp-controller="Dashboard" asp-action="KategoriEkle" class="btn btn-danger">Ekle</a>
+        <h4 class="font-weight-bold py-3 mb-0">Kategoriler</h4>
+        <div class="card">
+            <div class="card-datatable table-responsive">
+                <div id="grid"></div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+
+    $(function () {
+        var url = "/Magaza/Dashboard/KategoriTalepListesi";
+        $("#grid").dxDataGrid({
+            dataSource: DevExpress.data.AspNet.createStore({
+                key: "id",
+                loadUrl: url,
+                onBeforeSend: function (method, ajaxOptions) {
+                    ajaxOptions.xhrFields = { withCredentials: true };
+                }
+            }),
+            remoteOperations: true,
+            columns: [{
+                dataField: "kategori_adi",
+                caption: "Kategori",
+            }, {
+                dataField: "ust_kategori_adi",
+                caption: "Üst Kategori",
+
+            }, {
+                dataField: "yayin_durumu",
+                caption: "Yayın Durumu",
+            }, {
+                dataField: "durum",
+                caption: "Talep Durumu",
+            },
+            ],
+
+
+            scrolling: {
+                mode: "virtual"
+            },
+            height: 600,
+            showBorders: true,
+
+        });
+    });
+</script>

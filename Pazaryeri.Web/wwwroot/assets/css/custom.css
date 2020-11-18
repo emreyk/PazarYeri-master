@@ -1,0 +1,62 @@
+﻿.layout-1 .layout-content {
+    margin: auto;
+    max-width: 90%;
+}
+
+.dx-datagrid-header-panel {
+    padding: 15px 14px 15px 24px;
+    background-image: linear-gradient(white, #ececec);
+}
+
+.dx-toolbar {
+    background: transparent !important;
+}
+
+.dx-button-mode-contained {
+    background-color: #606c72 !important;
+}
+
+.dx-button-mode-contained {
+    color: white !important;
+}
+
+    .dx-button-mode-contained .dx-icon {
+        color: white !important;
+    }
+
+.dx-datagrid .dx-row > td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 25px;
+}
+
+.dx-toolbar .dx-toolbar-item-content > .dx-button.dx-button-normal {
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+    .dx-toolbar .dx-toolbar-item-content > .dx-button.dx-button-normal .dx-icon {
+        color: #ffffff;
+    }
+
+.dx-datagrid-filter-row {
+    background-color: #ffffff;
+}
+
+.dx-data-row.dx-state-hover, .dx-data-row.dx-state-hover td {
+    background-color: rgba(255, 255, 0, 0.1) !important;
+}
+
+.dx-datagrid-headers {
+    color: #606c72 !important;
+    font-size: 15px !important;
+    font-weight:bold !important;
+}
+
+.btn{
+    text-transform:none;
+}
+.resim img{
+    height:50px;
+
+}

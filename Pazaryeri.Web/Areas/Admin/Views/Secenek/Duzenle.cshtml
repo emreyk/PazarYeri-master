@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Duzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model SecenekListesiDTO
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+
+        <div class="card mb-4">
+            <h6 class="card-header">Seçenek Düzenle</h6>
+            <div class="card-body">
+                <form asp-action="Duzenle" method="post">
+                    <input type="hidden" asp-for="id" />
+                    <div class="form-group">
+                        <label class="form-label">Seçenek adı</label>
+                        <span asp-validation-for="ad" class="text-danger"></span>
+                        <input type="text" asp-for="ad" class="form-control" value="@Model.ad" />
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                    <a asp-action="Index" class="btn btn-info">Vazgeç</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

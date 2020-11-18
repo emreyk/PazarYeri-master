@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewData["Title"] = "Madde";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model SecenekMaddeKaydetDTO
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+
+        <div class="card mb-4">
+            <h6 class="card-header">Madde Ekle</h6>
+            <div class="card-body">
+                <form asp-action="Madde" method="post">
+
+                    <div class="form-group">
+                        <label class="form-label">Seçenek adı</label>
+                        <span asp-validation-for="ad" class="text-danger"></span>
+                        <input type="text" asp-for="ad" class="form-control" />
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <a asp-action="Index" class="btn btn-info">Vazgeç</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#secenekMaddeListesi").dxDataGrid({
+            dataSource: DevExpress.data.AspNet.createStore({
+                key: "id",
+                loadUrl: "/Admin/Secenek/MaddeJson"
+            }),
+
+            paging: { pageSize: 10 },
+            headerFilter: {
+                visible: true
+            },
+            hoverStateEnabled: true,
+            showColumnLines: true,
+            showColumnLines: true,
+            rowAlternationEnabled: true,
+            searchPanel: {
+                width: 350,
+                visible: true
+            },
+            headerFilter: {
+                visible: true
+            },
+
+            filterRow: {
+                visible: true,
+                applyFilter: "auto"
+            },
+            columns: [
+
+                {
+                    dataField: "id",
+                    caption: "id",
+                    visible: false,
+
+                },
+                {
+                    dataField: "ad",
+                    caption: "Seçenek Adı",
+                },
+
+                {
+                    caption: "",
+                    width: 100,
+
+                    allowFiltering: false,
+                    allowSorting: false,
+
+                    cellTemplate: function (container, options) {
+                        var id = options.data["id"];
+                        $('<a href="/admin/secenek/MaddeDuzenle/' + id + '"  class="btn btn-primary btn-sm">Düzenle </a>')
+
+                            .appendTo(container);
+                    }
+                },
+
+                {
+                    caption: "",
+                    width: 100,
+                    cellTemplate: function (container, options) {
+                        var id = options.data["id"];
+                        $('<a href="/admin/secenek/MaddeSil/' + id + '" asp-route-id   class="btn btn-danger btn-sm">Sil </a>')
+
+                            .appendTo(container);
+                    }
+                },
+            ],
+            onToolbarPreparing: function (e) {
+                var toolbarItems = e.toolbarOptions.items;
+                //var searchPanel = $.grep(toolbarItems, function (item) {
+                //    return item.name === "searchPanel";
+                //})[0];
+                //searchPanel.location = "after";
+
+                toolbarItems.push({
+                    text: "Madde Değerleri",
+                    location: "before"
+                });
+
+         
+            },
+
+        });
+
+
+    });
+
+
+</script>
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+        <div class="demo-container">
+            <div id="secenekMaddeListesi"></div>
+        </div>
+    </div>
+</div>
+
+

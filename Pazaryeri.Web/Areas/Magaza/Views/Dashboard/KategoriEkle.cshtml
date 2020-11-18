@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewData["Title"] = "KategoriEKle";
+    Layout = "~/Areas/Magaza/Views/Shared/_MagazaLayout.cshtml";
+}
+
+@section Css{
+
+    <link href="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/assets/libs/select2/select2.css" rel="stylesheet" />
+}
+
+@model KategoriEkleDTO
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+            
+        <div class="card mb-4">
+            <h6 class="card-header">Kategori Ekle</h6>
+            <div class="card-body">
+                <form asp-action="KategoriEkle" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="form-label">Bağlanacak kategori</label>
+                        <span asp-validation-for="id" class="text-danger"></span>
+                        <select name="id" class="select2-demo form-control" style="width: 100%" data-allow-clear="true">
+                            <option hidden value="-2">Seçiniz</option>
+                            <option value="0">Anakategori</option>
+                            @await Component.InvokeAsync("Kategoriler")
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kategori adı</label>
+                        <span asp-validation-for="kategori_adi" class="text-danger"></span>
+                        <input type="text" asp-for="kategori_adi" class="form-control" id="kategori" />
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Seo Url</label>
+                        <span asp-validation-for="seourl" class="text-danger"></span>
+                        <input type="text" asp-for="seourl" class="form-control" id="seourl" />
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Sıra</label>
+                        <span asp-validation-for="sira" class="text-danger"></span>
+                        <input type="text" asp-for="sira" class="form-control" />
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label w-100">Resim</label>
+                        <input type="file" name="resim">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-check">
+                            <input class="form-check-input" asp-for="yayin_durumu" type="checkbox" checked>
+                            <span class="form-check-label">Yayın durumu</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Js{
+
+
+    <script src="~/assets/js/yardimci.js"></script>
+    <script src="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/assets/libs/select2/select2.js"></script>
+    <script src="~/assets/js/pages/forms_selects.js"></script>
+}
+
+<script>
+    let baslik = document.querySelector("#kategori");
+    let seoBaslik = document.querySelector("#seourl");
+
+    baslik.addEventListener("keyup", SeoUrlGetir)
+    function SeoUrlGetir(e) {
+        seoBaslik.value = ToSeoUrl(e.target.value);
+    }
+</script>
+
+

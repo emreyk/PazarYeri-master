@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "Kaydet";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Css{
+
+    <link href="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/assets/libs/select2/select2.css" rel="stylesheet" />
+}
+
+@model BannerKaydetDTO
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+
+        <div class="card mb-4">
+            <h6 class="card-header">Banner Ekle</h6>
+            <div class="card-body">
+
+                <form asp-action="Kaydet" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="form-label">Banner adı</label>
+                        <span asp-validation-for="ad" class="text-danger"></span>
+                        <input type="text" asp-for="ad" class="form-control" />
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Bağlanacak kategori</label>
+                        <span asp-validation-for="KategoriId" class="text-danger"></span>
+                        <select name="KategoriId" class="select2-demo form-control" style="width: 100%" data-allow-clear="true">
+                            <option hidden value="-1">Seçiniz</option>
+                            @await Component.InvokeAsync("Kategoriler")
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Konum</label>
+                        <span asp-validation-for="tip" class="text-danger"></span>
+                        <select name="tip" class="select2-demo form-control" style="width: 100%" data-allow-clear="true">
+                            <option hidden value="seçiniz">Seçiniz</option>
+                            <option value="üst">üst</option>
+                            <option value="orta">orta</option>
+                            <option value="alt">alt</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label w-100">Resim</label>
+                        <input type="file" name="resim">
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <a asp-action="Index" class="btn btn-info btn">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Js{
+
+    <script src="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/assets/libs/select2/select2.js"></script>
+    <script src="~/assets/js/pages/forms_selects.js"></script>
+}

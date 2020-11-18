@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\**" />
+    <Content Remove="wwwroot\css\**" />
+    <EmbeddedResource Remove="wwwroot\css\**" />
+    <None Remove="wwwroot\css\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pazaryeri.Business\Pazaryeri.Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Magaza\Models\" />
+    <Folder Include="wwwroot\img\Kategori\" />
+    <Folder Include="wwwroot\img\Marka\" />
+    <Folder Include="wwwroot\img\Banner\" />
+    <Folder Include="wwwroot\img\Slider\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\libs\bootstrap-multiselect\bootstrap-multiselect.js" />
+    <None Include="wwwroot\assets\libs\select2\select2.js" />
+    <None Include="wwwroot\assets\libs\smartwizard\smartwizard.js" />
+    <None Include="wwwroot\devextreme\css\fonts\Roboto-300.woff2" />
+    <None Include="wwwroot\devextreme\css\fonts\Roboto-400.woff2" />
+    <None Include="wwwroot\devextreme\css\fonts\Roboto-500.woff2" />
+    <None Include="wwwroot\devextreme\css\fonts\Roboto-700.woff2" />
+    <None Include="wwwroot\devextreme\css\icons\dxicons.woff2" />
+    <None Include="wwwroot\devextreme\css\icons\dxiconsios.woff2" />
+    <None Include="wwwroot\devextreme\css\icons\dxiconsmaterial.woff2" />
+    <None Include="wwwroot\devextreme\js\dx.all.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>

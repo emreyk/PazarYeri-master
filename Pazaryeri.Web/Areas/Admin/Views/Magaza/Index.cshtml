@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script>
+    $(function () {
+
+
+        $("#MagazaListesi").dxDataGrid({
+            dataSource: DevExpress.data.AspNet.createStore({
+                key: "id",
+                loadUrl: "/Admin/Magaza/MagazaListesiJson"
+            }),
+
+
+
+            paging: { pageSize: 10 },
+            headerFilter: {
+                visible: true
+            },
+            hoverStateEnabled: true,
+            showColumnLines: true,
+            showColumnLines: true,
+            rowAlternationEnabled: true,
+            searchPanel: {
+                width: 350,
+                visible: true
+            },
+            headerFilter: {
+                visible: true
+            },
+
+            filterRow: {
+                visible: true,
+                applyFilter: "auto"
+            },
+            columns: [
+
+                {
+                    dataField: "id",
+                    caption: "id",
+                    visible: false,
+
+                },
+                {
+                    dataField: "magaza_adi",
+                    caption: "Mağaza adı",
+                 
+                },
+                {
+                    dataField: "eposta",
+                    caption: "E-posta",
+
+                },
+                {
+                    dataField: "telefon",
+                    caption: "Telefon",
+                },
+                {
+                    dataField: "tip",
+                    caption: "Tip",
+                },
+                {
+                    dataField: "durum",
+                    caption: "Durum",
+                    calculateCellValue: function (rowData) {
+                        if (rowData.durum == true) {
+                            return "onaylı";
+                        }
+                        else {
+                            return "onaysız";
+                        }
+                    }
+                },
+                {
+                    caption: "",
+                    width: 100,
+
+                    allowFiltering: false,
+                    allowSorting: false,
+
+                    cellTemplate: function (container, options) {
+                        var id = options.data["id"];
+                        var durum = options.data["durum"];
+
+                        if (durum == false) {
+                            $('<a href="/admin/magaza/MagazaOnayla/' + id + '"  class="btn btn-primary btn-sm">Onayla </a>').appendTo(container);
+                        }
+                        else {
+                            $('<a href="/admin/magaza/MagazaIptal/' + id + '"  class="btn btn-danger btn-sm">Onay iptal </a>').appendTo(container);
+                        }
+
+
+                    }
+                },
+
+            
+
+
+            ],
+            onToolbarPreparing: function (e) {
+                var toolbarItems = e.toolbarOptions.items;
+                //var searchPanel = $.grep(toolbarItems, function (item) {
+                //    return item.name === "searchPanel";
+                //})[0];
+                //searchPanel.location = "after";
+
+                toolbarItems.push({
+                    text: "Mağazalar",
+                    location: "before"
+                });
+
+              
+            },
+
+        });
+
+
+    });
+
+
+</script>
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+        <div class="demo-container">
+            <div id="MagazaListesi"></div>
+        </div>
+    </div>
+</div>
+

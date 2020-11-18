@@ -1,0 +1,16 @@
+﻿
+@model List<Pazaryeri.DTO.DTOs.KategoriDTOs.KategoriListeDTO>
+
+@foreach (var item in Model)
+{
+    
+    if (item.ust_kategori_id == 0)
+    {
+        <option value="@item.id">@item.kategori_adi</option>
+    }
+    else
+    {
+        <option value="@item.id">@item.ust_kategori_adi / @item.kategori_adi</option>
+    }
+
+}

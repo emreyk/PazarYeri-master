@@ -1,0 +1,13 @@
+﻿
+@model List<Pazaryeri.DTO.DTOs.SliderDTOs.SliderListeDTO>
+
+@foreach (var item in Model)
+{
+    <div class="item">
+        <a href=" #   " title="slide 1 - 1" target="_self">
+            <img class="responsive" src="~/img/Slider/@item.resim" alt="slide 1 - 1">
+        </a>
+        <div class="sohomeslider-description">
+        </div>
+    </div>
+}

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "MaddeDuzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Css{
+
+    <link href="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/assets/libs/select2/select2.css" rel="stylesheet" />
+}
+
+@model SecenekMaddeListesiDTO
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+
+        <div class="card mb-4">
+            <h6 class="card-header">Madde Düzenle</h6>
+            <div class="card-body">
+                <form asp-action="MaddeDuzenle" method="post">
+                    <div class="form-group">
+                        <label class="form-label">Seçenek Adı</label>
+                        <span asp-validation-for="id" class="text-danger"></span>
+                        <select name="SecenekId" class="select2-demo form-control" style="width: 100%" data-allow-clear="true">
+                            
+                            @foreach (SecenekListesiDTO item in ViewBag.Secenekler)
+                            {
+                                if (item.id == Model.SecenekId)
+                                {
+                                    <option value="@item.id" selected>@item.ad</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id" >@item.ad</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Seçenek adı</label>
+                        <span asp-validation-for="ad" class="text-danger"></span>
+                        <input type="text" asp-for="ad" class="form-control" />
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Düzenle</button>
+                    <a href="/admin/secenek/madde/@ViewBag.SecenekId" class="btn btn-info btn">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Js{
+
+
+    <script src="~/assets/js/yardimci.js"></script>
+    <script src="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/assets/libs/select2/select2.js"></script>
+    <script src="~/assets/js/pages/forms_selects.js"></script>
+}
+
+

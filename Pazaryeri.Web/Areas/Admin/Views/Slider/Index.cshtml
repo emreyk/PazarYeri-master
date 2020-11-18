@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<script>
+    $(function () {
+        $("#sliderListesi").dxDataGrid({
+            dataSource: DevExpress.data.AspNet.createStore({
+                key: "id",
+                loadUrl: "/Admin/Slider/SliderListesi"
+            }),
+
+            paging: { pageSize: 10 },
+            headerFilter: {
+                visible: true
+            },
+            hoverStateEnabled: true,
+            showColumnLines: true,
+            showColumnLines: true,
+            rowAlternationEnabled: true,
+            searchPanel: {
+                width: 350,
+                visible: true
+            },
+            headerFilter: {
+                visible: true
+            },
+
+            filterRow: {
+                visible: true,
+                applyFilter: "auto"
+            },
+            columns: [
+
+                {
+                    dataField: "resim",
+                    width: 200,
+                    allowFiltering: false,
+                    allowSorting: false,
+                    cellTemplate: function (container, options) {
+                      
+                        $("<div class='resim'>")
+                            .append($("<img>", { "src": "/img/Slider/" + options.value }))
+                            .appendTo(container);
+
+                    }
+                },
+
+                {
+                    dataField: "id",
+                    caption: "id",
+                    visible: false,
+
+                },
+                {
+                    dataField: "ad",
+                    caption: "Ad",
+
+                },
+               
+                
+
+                {
+                    caption: "",
+                    width: 100,
+
+                    allowFiltering: false,
+                    allowSorting: false,
+
+                    cellTemplate: function (container, options) {
+                        var id = options.data["id"];
+                        $('<a href="/admin/Slider/duzenle/' + id + '"  class="btn btn-primary btn-sm">Düzenle </a>')
+
+                            .appendTo(container);
+                    }
+                },
+                {
+                    caption: "",
+                    width: 100,
+                    cellTemplate: function (container, options) {
+                        var id = options.data["id"];
+                        $('<a href="/admin/Slider/sil/' + id + '"  class="btn btn-danger btn-sm">Sil </a>')
+
+                            .appendTo(container);
+                    }
+                }
+
+
+            ],
+            onToolbarPreparing: function (e) {
+                var toolbarItems = e.toolbarOptions.items;
+                //var searchPanel = $.grep(toolbarItems, function (item) {
+                //    return item.name === "searchPanel";
+                //})[0];
+                //searchPanel.location = "after";
+
+                toolbarItems.push({
+                    text: "Slider",
+                    location: "before"
+                });
+
+                toolbarItems.push({
+                    widget: "dxButton",
+                    options: {
+                        icon: "plus",
+                        onClick: function () {
+                            window.location = "/admin/slider/kaydet/ ";
+                        },
+                        text: "Yeni",
+                        height: 34,
+                        width: 100,
+                    },
+                    location: "before"
+                });
+            },
+
+        });
+
+
+    });
+
+
+</script>
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+        <div class="demo-container">
+            <div id="sliderListesi"></div>
+        </div>
+    </div>
+</div>
+
+
+
+

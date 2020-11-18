@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script>
+    $(function () {
+        $("#markaListesi").dxDataGrid({
+            dataSource: DevExpress.data.AspNet.createStore({
+                key: "id",
+                loadUrl: "/Admin/Marka/MarkaListesiJson"
+            }),
+
+
+
+            paging: { pageSize: 10 },
+            headerFilter: {
+                visible: true
+            },
+            hoverStateEnabled: true,
+            showColumnLines: true,
+            showColumnLines: true,
+            rowAlternationEnabled: true,
+            searchPanel: {
+                width: 350,
+                visible: true
+            },
+            headerFilter: {
+                visible: true
+            },
+
+            filterRow: {
+                visible: true,
+                applyFilter: "auto"
+            },
+            columns: [
+
+                {
+                    dataField: "id",
+                    caption: "id",
+                    visible: false,
+
+                },
+                {
+                    dataField: "resim",
+                    width: 100,
+                    allowFiltering: false,
+                    allowSorting: false,
+                    cellTemplate: function (container, options) {
+                        var resimAdi = options.value;
+                        if (resimAdi == 'default.png') {
+                            $("<div class='resim'>")
+                                .append($("<img>", { "src": "/img/" + options.value }))
+                                .appendTo(container);
+                        }
+                        else {
+                            $("<div class='resim'>")
+                                .append($("<img>", { "src": "/img/Marka/" + options.value }))
+                                .appendTo(container);
+                        }
+
+                    }
+                },
+                {
+                    dataField: "ad",
+                    caption: "Marka Adı",
+                },
+
+                {
+                    caption: "",
+                    width: 100,
+
+                    allowFiltering: false,
+                    allowSorting: false,
+
+                    cellTemplate: function (container, options) {
+                        var id = options.data["id"];
+                        $('<a href="/admin/marka/duzenle/' + id + '"  class="btn btn-primary btn-sm">Düzenle </a>')
+
+                            .appendTo(container);
+                    }
+                },
+
+                {
+                    caption: "",
+                    width: 100,
+                    cellTemplate: function (container, options) {
+                        var id = options.data["id"];
+                        $('<a href="/admin/marka/sil/' + id + '"  class="btn btn-danger btn-sm">Sil </a>')
+
+                            .appendTo(container);
+                    }
+                },
+
+            ],
+            onToolbarPreparing: function (e) {
+                var toolbarItems = e.toolbarOptions.items;
+                //var searchPanel = $.grep(toolbarItems, function (item) {
+                //    return item.name === "searchPanel";
+                //})[0];
+                //searchPanel.location = "after";
+
+                toolbarItems.push({
+                    text: "Markalar",
+                    location: "before"
+                });
+
+                toolbarItems.push({
+                    widget: "dxButton",
+                    options: {
+                        icon: "plus",
+                        onClick: function () {
+                            window.location = "/admin/marka/ekle ";
+                        },
+                        text: "Yeni",
+                        height: 34,
+                        width: 100,
+                    },
+                    location: "before"
+                });
+            },
+
+        });
+
+
+    });
+
+
+</script>
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+        <div class="demo-container">
+            <div id="markaListesi"></div>
+        </div>
+    </div>
+</div>
+

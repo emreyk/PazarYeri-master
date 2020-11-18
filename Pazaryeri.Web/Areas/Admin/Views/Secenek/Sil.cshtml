@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Sil";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model SecenekListesiDTO 
+<div class="row" style="margin:auto; width:70%">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bu veri kalıcı olarak silinicektir.Eminmisiniz?</h5>
+                <form asp-action="SecenekSil" method="post">
+                    <div class="form-group">
+                        <label class="form-label">Seçenek adı</label>
+                        <input type="text" asp-for="ad" value="@Model.ad" class="form-control" readonly />
+                        <div class="clearfix"></div>
+                    </div>
+                   
+                    
+                    <button type="submit" value="Sil" class="btn btn-primary">Sil</button>
+                    <a asp-action="Index" class="btn btn-info btn">İptal</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

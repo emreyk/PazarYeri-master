@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "Duzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@{
+    ViewData["Title"] = "Kaydet";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Css{
+
+    <link href="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/assets/libs/select2/select2.css" rel="stylesheet" />
+}
+
+@model SliderListeDTO
+
+<div class="layout-content">
+
+    <div class="container-fluid flex-grow-1 container-p-y">
+
+        <div class="card mb-4">
+            <h6 class="card-header">Slider Ekle</h6>
+            <div class="card-body">
+
+                <form asp-action="Duzenle" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label class="form-label">Banner adı</label>
+                        <span asp-validation-for="ad" class="text-danger"></span>
+                        <input type="text" asp-for="ad" class="form-control" value="@Model.ad" required />
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <input type="text" asp-for="resim" hidden />
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label w-100">Resim</label>
+                        <input type="file" name="resim">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Resim</label>
+                        <img src="~/img/Slider/@Model.resim" class="img-fluid img-radius wid-100" alt="">
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                    <a asp-action="Index" class="btn btn-info btn">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Js{
+
+    <script src="~/assets/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/assets/libs/select2/select2.js"></script>
+    <script src="~/assets/js/pages/forms_selects.js"></script>
+}
+
+
